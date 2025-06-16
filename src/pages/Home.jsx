@@ -6,9 +6,11 @@ function Home() {
   return (
     <>
       <div className="page">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
+          <button onClick={() => setCount(count - 1)}>−</button>
+          <button>Count: {count}</button>
+          <button onClick={() => setCount(count + 1)}>+</button>
+        </div>
       </div>
     </>
   )
