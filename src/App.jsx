@@ -8,7 +8,6 @@ import About  from './pages/About'
 import Settings from './pages/Settings'
 
 function App() {
-
   return (
     <>
       <BrowserRouter>

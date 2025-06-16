@@ -1,18 +1,11 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export function NavBar() {
   return (
-    <nav style={{
-      padding: '1rem',
-      backgroundColor: '#282c34',
-      color: 'white',
-      display: 'flex',
-      gap: '1rem',
-      justifyContent: 'center'
-    }}>
-      <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link>
-      <Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>About</Link>
-      <Link to="/settings" style={{ color: 'white', textDecoration: 'none' }}>Settings</Link>
+    <nav className="navbar">
+      <NavLink to="/" className="nav-link">Home</NavLink>
+      <NavLink to="/about" className="nav-link">About</NavLink>
+      <NavLink to="/settings" className="nav-link">Settings</NavLink>
     </nav>
   )
 }
