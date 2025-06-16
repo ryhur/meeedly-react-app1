@@ -3,20 +3,23 @@ import './App.css'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Routes } from 'react-router-dom'
 import { NavBar } from './components/NavBar'
+import Home from './pages/Home'
+import About  from './pages/About'
+import Settings from './pages/Settings'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<div>Home</div>} />
-          <Route path="/about" element={<div>About</div>} />
-          <Route path="/settings" element={<div>Settings</div>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </BrowserRouter>
+      
       {/* <div>
         <a href="https://vite.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />

@@ -7,11 +7,12 @@ export function NavBar() {
       backgroundColor: '#282c34',
       color: 'white',
       display: 'flex',
-      gap: '1rem'
+      gap: '1rem',
+      justifyContent: 'center'
     }}>
       <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link>
       <Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>About</Link>
       <Link to="/settings" style={{ color: 'white', textDecoration: 'none' }}>Settings</Link>
     </nav>
-  );
+  )
 }
