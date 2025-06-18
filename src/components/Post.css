@@ -1,11 +1,14 @@
 .post {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  padding: 1rem;
+  display: flex;
   margin: 1rem auto;
-  max-width: 300px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 15px 10px rgba(0,0,0,0.1);
+  max-width: 450px;
+}
+
+.post-content {
+  background-color: #ffffff;
+  padding: 0.5rem 1rem 1rem 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 3px rgba(175, 175, 175, 0.1);
 }
 
 .post-header {
@@ -16,39 +19,67 @@
 }
 
 .post-avatar {
-  border-radius: 10%;
+  border-radius: 50%;
   width: 50px;
   height: 50px;
   margin-right: 0.75rem;
-  background-color: #ffffff ;
+  box-shadow: 0px 0px 5px 3px rgba(105, 105, 105, 0.1);
+  border: none;
 }
 
 .post-author {
   font-weight: bold;
+  font-size: 1.2rem;
+  color: black;
+  padding-bottom: 0.2rem;
 }
 
 .post-time {
-  font-size: 0.85rem;
-  color: #cfcfcf;
+  font-size: 0.75rem;
+  color: rgb(85, 85, 85);
 }
 
 .post-body {
   margin: 0.75rem 0;
   text-align: left;
-  color: white;
+  color: rgb(39, 39, 39);
+  font-size: 0.9rem;
+}
+
+.post-actions {
+  display: flex;
+}
+
+.post-actions img {
+  width: 20px;
+  height: 20px;
 }
 
 .post-actions button {
-  margin-right: 1rem;
-  background: none;
   border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  color: #cfcfcf;
+  background: none;
+  color: #646464;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0;
+  font-size: 0.9rem;
 }
 
 .post-actions button:hover {
+  color: black;
 }
 
 .post-actions button.active {
+  color: black;
+}
+
+.post-actions-left {
+  display: flex;
+  gap: 0rem;
+  margin-right: auto;
+}
+
+.post-actions-left button {
+  width: 50px;
 }

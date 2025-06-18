@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './Post.css'
-import { ThumbsUp } from 'lucide-react';
-import { ThumbsDown } from 'lucide-react';
-import { Reply } from 'lucide-react';
-import profileSvg from '../assets/default-profile-picture.svg'
+import profileSvg from '../assets/default-male-profile.svg'
+import likeSvg from '../assets/like-icon.svg'
+import dislikeSvg from '../assets/dislike-icon.svg'
+import replySvg from '../assets/reply-icon.svg'
 
 export default function Post() {
   const [likes, setLikes] = useState(0)
@@ -42,32 +42,35 @@ export default function Post() {
 
   return (
     <div className="post">
-      <div className="post-header">
+      <div className="post-picture">
         <img src={profileSvg} alt="Profile" className="post-avatar" />
-        <div>
-          <div className="post-author">John Doe</div>
-          <div className="post-time">Posted 2 hours ago</div>
+      </div>
+      <div className="post-content">
+        <div className="post-header">
+          <div>
+            <div className="post-author">John Doe</div>
+            <div className="post-time">2 hours ago</div>
+          </div>
         </div>
-      </div>
-      <div className="post-body">
-        This is a sample post on the About page. Feel free to like, dislike, or reply!
-      </div>
-      <div className="post-actions">
-        <button
-          className={userLiked ? 'active' : ''}
-          onClick={handleLike}
-        >
-          <ThumbsUp color="#e3008c" /> {likes}
-        </button>
-        <button
-          className={userDisliked ? 'active' : ''}
-          onClick={handleDislike}
-        >
-          <ThumbsDown color="#e3008c" /> {dislikes}
-        </button>
-        <button>
-          <Reply color="#e3008c" />
-        </button>
+        <div className="post-body">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis ex purus, et eleifend leo feugiat in. Nam volutpat malesuada diam. Mauris a varius ex, a efficitur odio. Cras dapibus, lorem ac cursus iaculis, nunc mi consequat nibh, vitae varius magna nisl sit amet neque. Etiam ornare leo vel scelerisque mollis.
+        </div>
+        <div className="post-actions">
+          <div className="post-actions-left">
+            <button className={userLiked ? 'active' : ''} onClick={handleLike}>
+              <img src={likeSvg} alt="Profile" className="like-button" />
+              {likes}
+            </button>
+            <button className={userDisliked ? 'active' : ''} onClick={handleDislike}>
+              <img src={dislikeSvg} alt="Profile" className="dislike-button" />
+              {dislikes}
+            </button>
+          </div>
+          <button>
+            <img src={replySvg} alt="Profile" className="reply-button" />
+            Reply
+          </button>
+        </div>
       </div>
     </div>
   )
