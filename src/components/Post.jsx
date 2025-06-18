@@ -6,45 +6,22 @@ import dislikeSvg from '../assets/dislike-icon.svg'
 import replySvg from '../assets/reply-icon.svg'
 
 export default function Post() {
-  const [likes, setLikes] = useState(0)
-  const [dislikes, setDislikes] = useState(0)
+  const [userReaction, setUserReaction] = useState({ user_id: 36, reaction: null })
 
-  const [userLiked, setUserLiked] = useState(false)
-  const [userDisliked, setUserDisliked] = useState(false)
+  // Initial counts
+  const initialLikes = 0
+  const initialDislikes = 0
 
-  const handleLike = () => {
-    setLikes((prevLikes) => {
-      if (userLiked) {
-        return prevLikes - 1;
-      } else {
-        return prevLikes + 1;
-      }
-    });
+  // Calculate counts based on userReaction
+  const likes = userReaction.reaction === 'like' ? initialLikes + 1 : initialLikes
+  const dislikes = userReaction.reaction === 'dislike' ? initialDislikes + 1 : initialDislikes
 
-    setUserLiked((prevUserLiked) => !prevUserLiked);
-
-    if (userDisliked) {
-      setDislikes((prevDislikes) => prevDislikes - 1);
-      setUserDisliked(false);
-    }
-  };
-
-  const handleDislike = () => {
-    setDislikes((prevDislikes) => {
-      if (userDisliked) {
-        return prevDislikes - 1;
-      } else {
-        return prevDislikes + 1;
-      }
-    });
-
-    setUserDisliked((prevUserDisliked) => !prevUserDisliked);
-
-    if (userLiked) {
-      setLikes((prevLikes) => prevLikes - 1);
-      setUserLiked(false);
-    }
-  };
+  const toggleReaction = (reaction) => {
+    setUserReaction((prev) => ({
+      user_id: prev.user_id,
+      reaction: prev.reaction === reaction ? null : reaction,
+    }))
+  }
 
   return (
     <div className="post">
@@ -63,11 +40,17 @@ export default function Post() {
         </div>
         <div className="post-actions">
           <div className="post-actions-left">
-            <button className={userLiked ? 'active' : ''} onClick={handleLike}>
+            <button className={userReaction.reaction === 'like' ? 'active' : ''}
+              onClick={() => toggleReaction('like')}
+              aria-pressed={userReaction.reaction === 'like'}
+            >
               <img src={likeSvg} alt="Profile" className="like-button" />
               {likes}
             </button>
-            <button className={userDisliked ? 'active' : ''} onClick={handleDislike}>
+            <button className={userReaction.reaction === 'dislike' ? 'active' : ''}
+              onClick={() => toggleReaction('dislike')}
+              aria-pressed={userReaction.reaction === 'dislike'}
+            >
               <img src={dislikeSvg} alt="Profile" className="dislike-button" />
               {dislikes}
             </button>
