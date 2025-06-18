@@ -13,32 +13,38 @@ export default function Post() {
   const [userDisliked, setUserDisliked] = useState(false)
 
   const handleLike = () => {
-    if (userLiked) {
-      setLikes(likes - 1)
-      setUserLiked(false)
-    } else {
-      setLikes(likes + 1)
-      setUserLiked(true)
-      if (userDisliked) {
-        setDislikes(dislikes - 1)
-        setUserDisliked(false)
+    setLikes((prevLikes) => {
+      if (userLiked) {
+        return prevLikes - 1;
+      } else {
+        return prevLikes + 1;
       }
+    });
+
+    setUserLiked((prevUserLiked) => !prevUserLiked);
+
+    if (userDisliked) {
+      setDislikes((prevDislikes) => prevDislikes - 1);
+      setUserDisliked(false);
     }
-  }
+  };
 
   const handleDislike = () => {
-    if (userDisliked) {
-      setDislikes(dislikes - 1)
-      setUserDisliked(false)
-    } else {
-      setDislikes(dislikes + 1)
-      setUserDisliked(true)
-      if (userLiked) {
-        setLikes(likes - 1)
-        setUserLiked(false)
+    setDislikes((prevDislikes) => {
+      if (userDisliked) {
+        return prevDislikes - 1;
+      } else {
+        return prevDislikes + 1;
       }
+    });
+
+    setUserDisliked((prevUserDisliked) => !prevUserDisliked);
+
+    if (userLiked) {
+      setLikes((prevLikes) => prevLikes - 1);
+      setUserLiked(false);
     }
-  }
+  };
 
   return (
     <div className="post">
