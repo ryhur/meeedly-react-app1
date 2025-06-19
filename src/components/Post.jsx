@@ -5,23 +5,51 @@ import likeSvg from '../assets/like-icon.svg'
 import dislikeSvg from '../assets/dislike-icon.svg'
 import replySvg from '../assets/reply-icon.svg'
 
-export default function Post() {
-  const [userReaction, setUserReaction] = useState({ user_id: 36, reaction: null })
+export default function Post({ title, userName, body, reactionsObject }) {
+  const user_id = 1
 
-  // Initial counts
-  const initialLikes = 0
-  const initialDislikes = 0
+  const [reactions, setReactions] = useState(reactionsObject || [])
+  const likes = reactions?.filter(reaction => reaction?.reaction === true)
 
-  // Calculate counts based on userReaction
-  const likes = userReaction.reaction === 'like' ? initialLikes + 1 : initialLikes
-  const dislikes = userReaction.reaction === 'dislike' ? initialDislikes + 1 : initialDislikes
+  const dislikes = reactions?.filter(reaction => reaction?.reaction === false)
 
   const toggleReaction = (reaction) => {
-    setUserReaction((prev) => ({
-      user_id: prev.user_id,
-      reaction: prev.reaction === reaction ? null : reaction,
-    }))
+    const userExists = reactions?.some(item => item.user_id === user_id)
+
+    if (!userExists) {
+      setReactions(...reactions, { user_id: 1, reaction: reaction })
+      return;
+    }
+
+    const userSavedReaction = reactions?.filter(item => item.user_id === user_id)
+
+    const updated = reactions?.map(item => {
+      if (item?.user_id === user_id) {
+        return { ...item, reaction: reaction }; // update reaction
+      }
+
+      return item;
+    })
+
+    setReactions(updated)
   }
+
+  // const [userReaction, setUserReaction] = useState({ user_id: 36, reaction: null })
+
+  // // Initial counts
+  // const initialLikes = 0
+  // const initialDislikes = 0
+
+  // // Calculate counts based on userReaction
+  // const likes = userReaction.reaction === 'like' ? initialLikes + 1 : initialLikes
+  // const dislikes = userReaction.reaction === 'dislike' ? initialDislikes + 1 : initialDislikes
+
+  // const toggleReaction = (reaction) => {
+  //   setUserReaction((prev) => ({
+  //     user_id: prev.user_id,
+  //     reaction: prev.reaction === reaction ? null : reaction,
+  //   }))
+  // }
 
   return (
     <div className="post">
@@ -31,28 +59,26 @@ export default function Post() {
       <div className="post-content">
         <div className="post-header">
           <div>
-            <div className="post-author">John Doe</div>
-            <div className="post-time">2 hours ago</div>
+            <div className="post-author">{title}</div>
+            <div className="post-time">{userName}</div>
           </div>
         </div>
         <div className="post-body">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis ex purus, et eleifend leo feugiat in. Nam volutpat malesuada diam. Mauris a varius ex, a efficitur odio. Cras dapibus, lorem ac cursus iaculis, nunc mi consequat nibh, vitae varius magna nisl sit amet neque. Etiam ornare leo vel scelerisque mollis.
+          {body}
         </div>
         <div className="post-actions">
           <div className="post-actions-left">
-            <button className={userReaction.reaction === 'like' ? 'active' : ''}
-              onClick={() => toggleReaction('like')}
-              aria-pressed={userReaction.reaction === 'like'}
+            <button
+              onClick={() => toggleReaction(true)}
             >
               <img src={likeSvg} alt="Profile" className="like-button" />
-              {likes}
+              {likes.length}
             </button>
-            <button className={userReaction.reaction === 'dislike' ? 'active' : ''}
-              onClick={() => toggleReaction('dislike')}
-              aria-pressed={userReaction.reaction === 'dislike'}
+            <button
+              onClick={() => toggleReaction(false)}
             >
               <img src={dislikeSvg} alt="Profile" className="dislike-button" />
-              {dislikes}
+              {dislikes.length}
             </button>
           </div>
           <button>
