@@ -1,0 +1,29 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar a {
+  color: #cfcfcf;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+}
+.navbar a:hover {
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.nav-link.active {
+  color: #ffffff;
+  text-decoration: underline #E3008C 2px;
+}

@@ -11,6 +11,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --navbar-height: 60px;
 }
 
 a {
@@ -24,8 +25,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -50,11 +49,6 @@ button {
 button:hover {
   border-color: #E3008C;
 }
-/* button:focus {
-  outline: none;
-  border-color: #E3008C;
-  box-shadow: 0 0 0 4px #E3008C44;
-} */
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -69,35 +63,6 @@ button:hover {
   }
 }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background-color: #1a1a1a;
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-.navbar a {
-  color: #ffffff !important;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-}
-.navbar a:hover {
-  color: #cfcfcf !important;
-  border-radius: 4px;
-}
-
 .page {
-  padding-top: 0.25rem;
-}
-
-.nav-link.active {
-  text-decoration: underline #E3008C 2px;
+  padding-top: var(--navbar-height);
 }
