@@ -5,51 +5,43 @@ import likeSvg from '../assets/like-icon.svg'
 import dislikeSvg from '../assets/dislike-icon.svg'
 import replySvg from '../assets/reply-icon.svg'
 
-export default function Post({ title, userName, body, reactionsObject }) {
+export default function Post({ title, userName, body, reactionsArray }) {
+  // hardcode the user_id to 1 ("our current user")
   const user_id = 1
-
-  const [reactions, setReactions] = useState(reactionsObject || [])
-  const likes = reactions?.filter(reaction => reaction?.reaction === true)
-
-  const dislikes = reactions?.filter(reaction => reaction?.reaction === false)
+  // initialize the reactions state with the incoming reactions or empty array
+  const [reactions, setReactions] = useState(reactionsArray || [])
+  // check the user's stored reaction (if it exists) to highlight their reaction upon loading the page
+  const userStoredReaction = reactions.find(reactionObject => reactionObject?.user_id === user_id)?.reaction
+  // collect the reactions that are a "like"
+  const likes = reactions?.filter(reactionObject => reactionObject?.reaction === true)
+  // collect the reactions that are a "dislike"
+  const dislikes = reactions?.filter(reactionObject => reactionObject?.reaction === false)
 
   const toggleReaction = (reaction) => {
-    const userExists = reactions?.some(item => item.user_id === user_id)
+    // check if the current user already made a reaction on this post
+    const userReacted = reactions?.some(reactionObject => reactionObject.user_id === user_id)
 
-    if (!userExists) {
-      setReactions(...reactions, { user_id: 1, reaction: reaction })
-      return;
+    // if user didn't already make a reaction, add their id and reaction to reactions
+    if (!userReacted) {
+      // spread the reactions array and add a new object with the updated id and reaction
+      setReactions([...reactions, { user_id: user_id, reaction: reaction }])
+      return
     }
 
-    const userSavedReaction = reactions?.filter(item => item.user_id === user_id)
+    // not needed: const userSavedReactions = reactions?.filter(reaction => reaction?.user_id === user_id)
 
-    const updated = reactions?.map(item => {
-      if (item?.user_id === user_id) {
-        return { ...item, reaction: reaction }; // update reaction
+    const updatedReactions = reactions?.map(reactionObject => {
+      // if the user selects the same reaction -> untoggle, delete reaction (null)
+      // if the user selects a different reaction -> update the reaction to the new one
+      if (reactionObject?.user_id === user_id) {
+        return { ...reactionObject, reaction: reactionObject?.reaction === reaction ? null : reaction }
       }
 
-      return item;
+      return reactionObject
     })
 
-    setReactions(updated)
+    setReactions(updatedReactions)
   }
-
-  // const [userReaction, setUserReaction] = useState({ user_id: 36, reaction: null })
-
-  // // Initial counts
-  // const initialLikes = 0
-  // const initialDislikes = 0
-
-  // // Calculate counts based on userReaction
-  // const likes = userReaction.reaction === 'like' ? initialLikes + 1 : initialLikes
-  // const dislikes = userReaction.reaction === 'dislike' ? initialDislikes + 1 : initialDislikes
-
-  // const toggleReaction = (reaction) => {
-  //   setUserReaction((prev) => ({
-  //     user_id: prev.user_id,
-  //     reaction: prev.reaction === reaction ? null : reaction,
-  //   }))
-  // }
 
   return (
     <div className="post">
@@ -69,12 +61,14 @@ export default function Post({ title, userName, body, reactionsObject }) {
         <div className="post-actions">
           <div className="post-actions-left">
             <button
+              className={userStoredReaction === true ? 'active' : ''}
               onClick={() => toggleReaction(true)}
             >
               <img src={likeSvg} alt="Profile" className="like-button" />
               {likes.length}
             </button>
             <button
+              className={userStoredReaction === false ? 'active' : ''}
               onClick={() => toggleReaction(false)}
             >
               <img src={dislikeSvg} alt="Profile" className="dislike-button" />

@@ -17,11 +17,11 @@ function About() {
         "reaction": true
       },
       {
-        "user_id": 12,
+        "user_id": 2,
         "reaction": true
       },
       {
-        "user_id": 13,
+        "user_id": 3,
         "reaction": false
       }
     ],
@@ -41,14 +41,14 @@ function About() {
     "reactions": [
       {
         "user_id": 1,
+        "reaction": false
+      },
+      {
+        "user_id": 2,
         "reaction": true
       },
       {
-        "user_id": 12,
-        "reaction": true
-      },
-      {
-        "user_id": 13,
+        "user_id": 3,
         "reaction": false
       }
     ],
@@ -58,8 +58,8 @@ function About() {
   },
   {
     "id": 3,
-    "title": "His father had always taught him",
-    "body": "His father had always taught him not to ever think of himself as better than others. He'd tried to live by this motto. He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.",
+    "title": "His sister had always taught him",
+    "body": "His sister had always taught him not to ever think of himself as better than others. He'd tried to live by this motto. He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.",
     "tags": [
       "history",
       "american",
@@ -67,27 +67,33 @@ function About() {
     ],
     "reactions": [
       {
-        "user_id": 12,
+        "user_id": 1,
+        "reaction": null
+      },
+      {
+        "user_id": 2,
         "reaction": true
       },
       {
-        "user_id": 13,
+        "user_id": 3,
         "reaction": false
+      },
+      {
+        "user_id": 4,
+        "reaction": null
       }
     ],
     "views": 400,
     "userId": 122,
-    "userName": "Rylan"
+    "userName": "Shenal"
   }]
-
-
 
   return (
     <>
       {
         posts.map(({ id, title, userName, body, reactions }) => {
           return (
-            <Post key={id} title={title} userName={userName} body={body} reactionsObject={reactions} />
+            <Post key={id} title={title} userName={userName} body={body} reactionsArray={reactions} />
           )
         })
       }

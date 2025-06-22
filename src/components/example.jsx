@@ -38,33 +38,37 @@ const posts = [{
   "userId": 122
 }]
 
+// previous revised code - per chatgpt
+// const [userReaction, setUserReaction] = useState({ user_id: 36, reaction: null })
 
+// // Initial counts
+// const initialLikes = 0
+// const initialDislikes = 0
 
+// // Calculate counts based on userReaction
+// const likes = userReaction.reaction === 'like' ? initialLikes + 1 : initialLikes
+// const dislikes = userReaction.reaction === 'dislike' ? initialDislikes + 1 : initialDislikes
 
-
-
-
-
-
-
-
-
-
-
-
-
+// const toggleReaction = (reaction) => {
+//   setUserReaction((prev) => ({
+//     user_id: prev.user_id,
+//     reaction: prev.reaction === reaction ? null : reaction,
+//   }))
+// }
 
 
 const handleReaction = () => {
   if (userLiked) {
     setLikes(likes - 1)
     setUserLiked(false)
-    return;
+    return; // 2) if user liked, we can return early
   }
 
+  // 3) code below MUST execute since at this point we know with 100% certainty that the user has not clicked like
   setLikes(likes + 1)
   setUserLiked(true)
 
+  // 3.1) thats why we can remove the if-statement checking for the userDisliked condition
   setDislikes(dislikes - 1)
   setUserDisliked(false)
 
@@ -73,7 +77,9 @@ const handleReaction = () => {
   //   setUserDisliked(false)
   // }
 
-  return;
+  return; // 4) ensure we return in any case
+
+  //
 
   // if (userLiked) {
   //   setLikes(likes - 1)
@@ -88,6 +94,8 @@ const handleReaction = () => {
   // }
 }
 
+// 1) remove handleDislike(). we only need handleReaction() because it is near-zero probability that the user will be able to select like and dislike at the same time
+
 // const handleDislike = () => {
 //   if (userDisliked) {
 //     setDislikes(dislikes - 1)
@@ -101,4 +109,3 @@ const handleReaction = () => {
 //     }
 //   }
 // }
-
