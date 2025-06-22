@@ -11,7 +11,7 @@ export default function Post({ title, userName, body, reactionsArray }) {
   // initialize the reactions state with the incoming reactions or empty array
   const [reactions, setReactions] = useState(reactionsArray || [])
   // check the user's stored reaction (if it exists) to highlight their reaction upon loading the page
-  const userStoredReaction = reactions.find(reactionObject => reactionObject?.user_id === user_id)?.reaction
+  const userStoredReaction = reactions?.find(reactionObject => reactionObject?.user_id === user_id)?.reaction
   // collect the reactions that are a "like"
   const likes = reactions?.filter(reactionObject => reactionObject?.reaction === true)
   // collect the reactions that are a "dislike"
